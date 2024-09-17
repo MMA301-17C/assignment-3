@@ -1,80 +1,91 @@
-import { ScrollView, View, Text, StyleSheet, Image, Pressable } from 'react-native';
-
-import { NavigationProp } from '@react-navigation/native';
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+} from "react-native";
+import { NavigationProp } from "@react-navigation/native";
 
 interface WelcomeScreenProps {
   navigation: NavigationProp<any>;
 }
 
-export default function WelcomeScreen({ navigation }: Readonly<WelcomeScreenProps>) {
+export default function WelcomeScreen({
+  navigation,
+}: Readonly<WelcomeScreenProps>) {
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.headerWrapper}>
-        <Image
-          style={styles.image}
-          source={require('../img/logo.png')}
-          resizeMode="cover"
-          accessible={true}
-          accessibilityLabel={'Little Lemon Logo'}
-        />
-
-        <Text style={styles.headerText}>Little Lemon</Text>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        <View style={styles.headerWrapper}>
+          <Image
+            style={styles.image}
+            source={require("../img/logo-brand.png")}
+            resizeMode="contain"
+            accessible={true}
+            accessibilityLabel={"Little Lemon Logo"}
+          />
+          <Text style={styles.regularText}>
+            Little Lemon, your local Mediterranean Bistro
+          </Text>
+        </View>
+      </ScrollView>
+      <View style={styles.buttonWrapper}>
+        <Pressable
+          onPress={() => navigation.navigate("Subscribe")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Newsletter</Text>
+        </Pressable>
       </View>
-      <Text style={styles.regularText}>
-        Little Lemon is a charming neighborhood bistro that serves simple food
-        and classic cocktails in a lively but casual environment. We would love
-        to hear your experience with us!
-      </Text>
-      <Pressable
-        onPress={() => navigation.navigate('Menu')}
-        style={styles.button}>
-        <Text style={styles.buttonText}>View Menu</Text>
-      </Pressable>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#333333',
+    backgroundColor: "#fff",
+  },
+  contentContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   headerWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     margin: 10,
   },
-  headerText: {
-    paddingRight: 10,
-    paddingLeft: 20,
-    paddingTop: 30,
-    paddingBottom: 10,
-    fontSize: 30,
-    color: '#EDEFEE',
-    textAlign: 'center',
-  },
   regularText: {
-    fontSize: 24,
+    fontSize: 20,
     padding: 20,
     marginVertical: 8,
-    color: '#EDEFEE',
-    textAlign: 'center',
+    color: "#000",
+    textAlign: "center",
+    fontWeight: "bold",
   },
   image: {
-    width: 100,
-    height: 100,
-    borderRadius: 20,
+    width: 200,
+    height: 200,
+  },
+  buttonWrapper: {
+    position: "absolute",
+    bottom: 40,
+    left: 0,
+    right: 0,
+    alignItems: "center",
   },
   button: {
-    backgroundColor: '#FFD700',
+    backgroundColor: "#495e57",
     padding: 10,
-    margin: 20,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
+    width: 300,
   },
   buttonText: {
     fontSize: 20,
-    color: '#333333',
-    fontWeight: 'bold',
+    color: "#fff",
   },
 });
